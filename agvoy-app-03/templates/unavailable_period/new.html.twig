@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New UnavailablePeriod{% endblock %}
+
+{% block body %}
+    <h1>Create new UnavailablePeriod</h1>
+
+    {{ include('unavailable_period/_form.html.twig') }}
+
+    <a href="{{ path('unavailable_period_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Region index{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+
+    <!-- Jumbotron Header -->
+    <header class="jumbotron my-4">
+      <h1 class="display-3">Check our rooms</h1>
+      <p class="lead">Our C&Cs With thousands of C&Cs with rooms ready-to-book, you’re sure to find the perfect C&C for you.</p>
+      <a href="#" class="btn btn-primary btn-lg">Call to action!</a>
+    </header>
+    <div class="row text-center">
+	    {% for region in regions %}
+			<div class="col-lg-3 col-md-6 mb-4">
+        		<div class="card h-100">
+          		<img class="card-img-top" src="http://placehold.it/500x325" alt="">
+          		<div class="card-body">
+            		<h4 class="card-title">{{ region.name }}</h4>
+           			<div class="card-text"> <div><span class="h5">Description:</span> {{ region.presentation }}
+           			</div>
+          		</div>
+          		<div class="card-footer">
+          			<div class="btn-group ">
+            			<a href="{{ path('region_show', {'id': region.id}) }}" class="btn btn-primary">View</a>
+            		 </div>
+        		</div>
+      		</div>	
+		{% endfor %}
+
+        	{% if is_granted('ROLE_ADMIN') %}
+           		<a href="{{ path('room_edit', {'id':room.id }) }}">edit</a>
+            {% endif %}
+		</div>
+		</div>
+
+
+
+
+
+
+
+
+
+    <h1>Region index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Presentation</th>
+                <th>Country</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for region in regions %}
+            <tr>
+                <td>{{ region.id }}</td>
+                <td>{{ region.name }}</td>
+                <td>{{ region.presentation }}</td>
+                <td>{{ region.country }}</td>
+                <td>
+                    <a href="{{ path('region_show', {'id': region.id}) }}">show</a>
+                    <a href="{{ path('region_edit', {'id': region.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('region_new') }}">Create new</a>
+{% endblock %}

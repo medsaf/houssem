@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Room index{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+
+    <!-- Jumbotron Header -->
+    <header class="jumbotron my-4">
+      <h1 class="display-3">Check our rooms</h1>
+      <p class="lead">Our C&Cs With thousands of C&Cs with rooms ready-to-book, you’re sure to find the perfect C&C for you.</p>
+      <a href="#" class="btn btn-primary btn-lg">Call to action!</a>
+    </header>
+    <div class="row text-center">
+	    {% for room in rooms %}
+			<div class="col-lg-3 col-md-6 mb-4">
+        		<div class="card h-100">
+          		<img class="card-img-top" src="{{ vich_uploader_asset(rooms,'imageFile' }}" alt="">
+          		<div class="card-body">
+            		<h4 class="card-title">{{ room.summary }}</h4>
+           			<div class="card-text"> <div><span class="h5">Description:</span> {{ room.description }}
+           			</div>
+          		</div>
+          		<div class="card-footer">
+          			<div class="btn-group ">
+            			<a href="{{ path('room_show', {'id': room.id}) }}" class="btn btn-primary">View</a>
+            			<a href="{{ path('room_like', {'id': room.id}) }}" class="btn btn-primary">
+            			 {%  if message=='add' %}
+            			 	<i class="fas fa-heart"></i>
+						 {% elseif message=="remove" %}
+						 	<i class="fas fa-times-circle"></i>	
+            			 {% endif %}
+            			</a>
+            		 </div>
+        		</div>
+      		</div>	
+		{% endfor %}
+
+        	{% if is_granted('ROLE_ADMIN') %}
+           		<a href="{{ path('room_edit', {'id':room.id }) }}">edit</a>
+            {% endif %}
+		</div>
+		</div>
+  
+{% endblock %}

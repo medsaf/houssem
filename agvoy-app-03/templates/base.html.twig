@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <!-- Bootstrap core CSS -->
+		<link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+		<!-- Custom styles for this template -->
+		<link href="{{ asset('css/agency.css') }}" rel="stylesheet">
+		<link href="{{ asset('css/heroic-features.css') }}" rel="stylesheet">
+		<!-- Bootstrap core JavaScript -->
+		<script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+		<script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script> 
+		<!-- foont-awsome --> 
+		<link rel="stylesheet" href="{{ asset('css/all.css') }}">
+	
+  		
+   </head>
+
+    <body>
+    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark fixed-top">
+                    <div class="container">
+                      <a class="navbar-brand" href="/frontoffice" >Couettes & cafés</a>
+                      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>
+                      <div class="collapse navbar-collapse" id="navbarsMainDefault">
+                        <ul class="navbar-nav mr-auto">
+                          {{ render_bootstrap_menu('main') }}
+                        </ul>
+                        <ul class="navbar-nav mr-auto">
+                          {% if app.user %}
+                            {{ render_bootstrap_menu('account') }} 
+                          {% else %}
+                            {{ render_bootstrap_menu('anonymousaccount') }}
+                          {% endif %}
+                        </ul>
+                      </div>
+                    </div>
+                  </nav>
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

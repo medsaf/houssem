@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}UnavailablePeriod index{% endblock %}
+
+{% block body %}
+    <h1>UnavailablePeriod index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Beginning</th>
+                <th>End_date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for unavailable_period in unavailable_periods %}
+            <tr>
+                <td>{{ unavailable_period.id }}</td>
+                <td>{{ unavailable_period.beginning ? unavailable_period.beginning|date('Y-m-d') : '' }}</td>
+                <td>{{ unavailable_period.endDate ? unavailable_period.endDate|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('unavailable_period_show', {'id': unavailable_period.id}) }}">show</a>
+                    <a href="{{ path('unavailable_period_edit', {'id': unavailable_period.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('unavailable_period_new') }}">Create new</a>
+{% endblock %}
